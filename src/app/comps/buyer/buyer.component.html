@@ -1,0 +1,38 @@
+<span class="emoji">🛍️</span>
+
+<table mat-table [dataSource]="dateSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name</th>
+    <td mat-cell *matCellDef="let order"> {{order.name}} </td>
+    <td mat-footer-cell *matFooterCellDef> Total</td>
+  </ng-container>
+
+  <ng-container matColumnDef="cost">
+    <th mat-header-cell *matHeaderCellDef> Cost</th>
+    <td mat-cell *matCellDef="let order"> {{order.cost | currency}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <ng-container matColumnDef="quantity">
+    <th mat-header-cell *matHeaderCellDef> Quantity</th>
+    <td mat-cell *matCellDef="let order"> {{order.quantity}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <ng-container matColumnDef="due">
+    <th mat-header-cell *matHeaderCellDef> Due</th>
+    <td mat-cell *matCellDef="let order">
+      {{(order.quantity * order.cost) | currency}} </td>
+    <td mat-footer-cell *matFooterCellDef> {{ total > 0 ? (total | currency) : '' }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns" class="example-first-footer-row"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+</table>
+
+<button class="fabButton"
+        color="primary" mat-fab (click)="payUp()">
+  <mat-icon>add_shopping_cart</mat-icon>
+</button>

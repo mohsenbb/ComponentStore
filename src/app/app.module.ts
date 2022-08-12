@@ -7,10 +7,18 @@ import { MatTableModule } from "@angular/material/table";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { ReactiveFormsModule } from "@angular/forms";
+import { BoutiqueComponent } from './comps/boutique/boutique.component';
+import { BuyerComponent } from './comps/buyer/buyer.component';
+import { ManagerComponent } from './comps/manager/manager.component';
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BoutiqueComponent,
+    BuyerComponent,
+    ManagerComponent
   ],
   imports: [
     BrowserModule,
@@ -18,7 +26,9 @@ import { ReactiveFormsModule } from "@angular/forms";
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
