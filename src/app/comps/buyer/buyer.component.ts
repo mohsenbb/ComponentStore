@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Order } from "../order.model";
 
 @Component({
@@ -18,14 +18,15 @@ export class BuyerComponent implements OnChanges {
   dateSource: any;
   displayedColumns: string[] = ['name', 'cost', 'quantity', 'due'];
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges() {
     this.orders = this.orders?.filter(order => order.quantity > 0);
     this.setTotal();
     this.dateSource = this.orders;
   }
 
   setTotal() {
-    this.total = this.orders?.reduce((acc, order) => acc + order.cost * order.quantity, 0);
+    this.total = this.orders?.reduce((acc, order) =>
+      acc + order.cost * order.quantity, 0);
   }
 
   payUp() {

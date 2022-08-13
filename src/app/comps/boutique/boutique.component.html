@@ -22,7 +22,6 @@
     <td mat-cell *matCellDef="let product;">
       <mat-form-field appearance="outline" floatLabel="never">
         <input matInput #quantity
-               value="{{ product?.quantity == 0 ? '' : product?.quantity}}"
                (blur)="addOrder(quantity.value, product)">
       </mat-form-field>
     </td>

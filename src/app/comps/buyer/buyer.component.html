@@ -33,6 +33,7 @@
 </table>
 
 <button class="fabButton"
+        [disabled]="!total"
         color="primary" mat-fab (click)="payUp()">
   <mat-icon>add_shopping_cart</mat-icon>
 </button>

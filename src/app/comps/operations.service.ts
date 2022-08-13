@@ -27,7 +27,6 @@ export class OperationsService {
     orders.forEach(order => {
       const product: any = this.products.find(product => product.id === order.id);
       product.sold += order.quantity;
-      product.quantity = 0;
     });
     this.subjectProduct.next(this.products);
   }

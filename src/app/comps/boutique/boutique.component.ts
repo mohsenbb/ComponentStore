@@ -6,11 +6,9 @@ import {
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges
 } from '@angular/core';
 import { Product } from "../product.model";
 import { Order } from "../order.model";
-import { OperationsService } from "../operations.service";
 
 @Component({
   selector: 'app-boutique',
@@ -26,15 +24,14 @@ export class BoutiqueComponent implements OnInit, OnChanges {
   dateSource: any;
   displayedColumns: string[] = ['sold', 'name', 'cost', 'quantity'];
 
-  constructor(private service: OperationsService,
-              private cd: ChangeDetectorRef) {
+  constructor(private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
     this.dateSource = this.products;
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges() {
     this.orderMap.clear();
     this.dateSource = [];
     this.cd.detectChanges();
