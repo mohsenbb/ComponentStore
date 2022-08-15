@@ -8,7 +8,8 @@ import {
   Output,
 } from '@angular/core';
 import { Product } from "../product.model";
-import { Order } from "../order.model";
+import { createOrder, Order } from "../order.model";
+import { OperationsService } from "../operations.service";
 
 @Component({
   selector: 'app-boutique',
@@ -24,7 +25,8 @@ export class BoutiqueComponent implements OnInit, OnChanges {
   dateSource: any;
   displayedColumns: string[] = ['sold', 'name', 'cost', 'quantity'];
 
-  constructor(private cd: ChangeDetectorRef) {
+  constructor(private store: OperationsService,
+              private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -33,19 +35,18 @@ export class BoutiqueComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.orderMap.clear();
+    this.refreshUI();
+  }
+
+  refreshUI() {
     this.dateSource = [];
     this.cd.detectChanges();
     this.dateSource = this.products;
   }
 
   addOrder(quantity: string, product: Product) {
-    const order: Order = {
-      id: product.id,
-      quantity: +quantity,
-      cost: product.cost,
-      name: product.name
-    };
-    this.orderMap.set(+product.id, order);
+    const newOrder = createOrder(quantity, product);
+    this.orderMap.set(+product.id, newOrder);
     this.emitOrder.emit([...this.orderMap.values()]);
   }
 }

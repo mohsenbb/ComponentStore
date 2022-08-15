@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OperationsService } from "../operations.service";
 import { Order } from "../order.model";
+import { Product } from "../product.model";
 
 @Component({
   selector: 'app-manager',
@@ -9,14 +10,14 @@ import { Order } from "../order.model";
 })
 export class ManagerComponent implements OnInit {
 
-  products: any;
+  products!: Product[];
   orders!: Order[];
-  profit: number = 0
+  earnings: number = 0
 
-  constructor(private service: OperationsService) { }
+  constructor(private store: OperationsService) { }
 
   ngOnInit(): void {
-    this.service.subjectProduct.subscribe(products => {
+    this.store.subjectProduct.subscribe(products => {
       this.products = [...products];
     })
   }
@@ -26,7 +27,7 @@ export class ManagerComponent implements OnInit {
   }
 
   receivePayment(newPayment: number) {
-    this.profit += newPayment;
-    this.service.updateSales(this.orders);
+    this.earnings += newPayment;
+    this.store.updateSales(this.orders);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { Order } from "../order.model";
+import { getOrdersWithQuantity, getPaymentDue, Order } from "../order.model";
 
 @Component({
   selector: 'app-buyer',
@@ -8,35 +8,26 @@ import { Order } from "../order.model";
 })
 export class BuyerComponent implements OnChanges {
 
-  @Input() orders!: Order[];
+  @Input() orders: Order[] = [];
 
   @Output() emitPayment = new EventEmitter<number>();
   @Output() emitPaidUp = new EventEmitter<any>();
 
-  total = 0;
+  paymentDue = 0;
 
   dateSource: any;
   displayedColumns: string[] = ['name', 'cost', 'quantity', 'due'];
 
   ngOnChanges() {
-    this.orders = this.orders?.filter(order => order.quantity > 0);
-    this.setTotal();
+    this.orders = getOrdersWithQuantity(this.orders);
+    this.paymentDue = getPaymentDue(this.orders);
     this.dateSource = this.orders;
   }
 
-  setTotal() {
-    this.total = this.orders?.reduce((acc, order) =>
-      acc + order.cost * order.quantity, 0);
-  }
-
-  payUp() {
-    if (!this.total) {
-      return;
-    }
-    this.emitPayment.emit(this.total);
+  makePayment() {
+    this.emitPayment.emit(this.paymentDue);
     this.emitPaidUp.emit();
-    this.total = 0;
-    this.orders = [];
-    this.dateSource = this.orders;
+    this.paymentDue = 0;
+    this.dateSource = [];
   }
 }
