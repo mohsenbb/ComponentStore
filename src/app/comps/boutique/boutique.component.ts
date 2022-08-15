@@ -22,7 +22,7 @@ export class BoutiqueComponent implements OnInit, OnChanges {
 
   orderMap = new Map<number, Order>;
 
-  dateSource: any;
+  dataSource: any;
   displayedColumns: string[] = ['sold', 'name', 'cost', 'quantity'];
 
   constructor(private store: OperationsService,
@@ -30,7 +30,7 @@ export class BoutiqueComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.dateSource = this.products;
+    this.dataSource = this.products;
   }
 
   ngOnChanges() {
@@ -38,12 +38,18 @@ export class BoutiqueComponent implements OnInit, OnChanges {
     this.refreshUI();
   }
 
+  // will always need this because quantity is not part of model displayed,
+  // so to refresh the view and empty those input fields, we jolt the UI with
+  // temp change of the dataSource
   refreshUI() {
-    this.dateSource = [];
+    this.dataSource = [];
     this.cd.detectChanges();
-    this.dateSource = this.products;
+    this.dataSource = this.products;
   }
 
+  // TODO: move method to store, we also need:
+  //   1. patchState of orders with updated orders
+  //   2. patchState of paymentDue with new payment
   addOrder(quantity: string, product: Product) {
     const newOrder = createOrder(quantity, product);
     this.orderMap.set(+product.id, newOrder);
