@@ -13,7 +13,7 @@ export class BuyerComponent implements OnChanges {
   //   1. the `@Input`
   //   2. the `@Output`
   //   3. now that `orders$` can be sync'ed up in store, we can select
-  //      `paymentDue$` from there
+  //      `paymentDue$` from there (should become `paymentDue$` here)
   //   4. `dataSource` should be initialized from the `orders$` selector
   @Input() orders: Order[] = [];
   @Output() emitPayment = new EventEmitter<number>();

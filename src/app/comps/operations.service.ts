@@ -8,8 +8,6 @@ import { Order } from "./order.model";
 })
 export class OperationsService {
 
-  readonly subjectProduct = new BehaviorSubject<Product[]>([]);
-
   products: Product[] = [
     {id: 10, sold: 0, name: 'Beach ball', cost: 14},
     {id: 20, sold: 0, name: 'Towel', cost: 5},
@@ -20,12 +18,10 @@ export class OperationsService {
   ];
 
   constructor() {
-    this.subjectProduct.next(this.products);
   }
 
   updateSales(orders: Order[]) {
     updateSoldProperty(this.products, orders);
-    this.subjectProduct.next(this.products);
   }
 
   // TODO: create a `makePayment()` method that does this:
