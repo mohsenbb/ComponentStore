@@ -22,8 +22,8 @@ export class BoutiqueComponent implements OnInit, OnChanges, OnInit {
   //   2. the `@Output`
   //   3. move the orderMap and it's logic to the store
   @Input() products!: Product[] | null;
-  @Output() emitOrder = new EventEmitter<Order[]>();
-  orderMap = new Map<number, Order>;
+  @Output() emitOrders = new EventEmitter<Order[]>();
+  ordersMap = new Map<number, Order>;
 
   // TODO: dataSource should be initialized from the products$ selector, something like:
   //       dataSource = the store's products$
@@ -41,7 +41,7 @@ export class BoutiqueComponent implements OnInit, OnChanges, OnInit {
   //   1. yep, not needed too! `orderMap` logic moved to store,
   //      and `dataSource` is already bound
   ngOnChanges() {
-    this.orderMap.clear();
+    this.ordersMap.clear();
     this.dataSource = this.products;
   }
 
@@ -49,7 +49,7 @@ export class BoutiqueComponent implements OnInit, OnChanges, OnInit {
   //    1. all that's needed here is to call the store's `addOrder(...)`
   addOrder(quantity: string, product: Product) {
     const newOrder = createOrder(quantity, product);
-    this.orderMap.set(product.id, newOrder);
-    this.emitOrder.emit([...this.orderMap.values()]);
+    this.ordersMap.set(product.id, newOrder);
+    this.emitOrders.emit([...this.ordersMap.values()]);
   }
 }
