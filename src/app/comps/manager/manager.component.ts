@@ -9,6 +9,11 @@ import { Product } from "../product.model";
   styleUrls: ['./manager.component.scss']
 })
 export class ManagerComponent implements OnInit {
+  // TODO: make manager happy! he's only concerned with "earnings", then
+  //   1. ditch `products`; boutique component can get it's products from store
+  //   2. ditch `orders`; buyer component knows best how to get its data
+  //   3. yep, all manager needs to be concerned with is `earnings$` for growth n'all;
+  //      what's needed is a selector that "binds" store's `earnings$` to the one here
 
   products!: Product[];
   orders!: Order[];

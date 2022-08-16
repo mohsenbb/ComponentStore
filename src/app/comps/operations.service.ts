@@ -27,4 +27,15 @@ export class OperationsService {
     updateSoldProperty(this.products, orders);
     this.subjectProduct.next(this.products);
   }
+
+  // TODO: create a `makePayment()` method that does this:
+  //   1. use rxjs's zip() on `earnings$` and `this.paymentDue$`
+  //   2. patchState of `earnings` by adding zip's observables
+  //   we can now:
+  //   3. patchState of `paymentDue` to zero now
+  //   4. patchState of `orders` to []
+  //   5. call the `updateSales()` method
+
+  // TODO: create an `updateSales() method that does this:
+  //   1.
 }

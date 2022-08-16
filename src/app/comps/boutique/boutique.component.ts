@@ -30,7 +30,7 @@ export class BoutiqueComponent implements OnInit, OnChanges, OnInit, OnDestroy {
 
   sub = new Subscription();
 
-  // TODO: dataSource should be initialized from products$ selector, not @Input...
+  // TODO: dataSource should be initialized from the products$ selector
   dataSource: any;
   displayedColumns: string[] = ['sold', 'name', 'cost', 'quantity'];
 
