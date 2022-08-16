@@ -37,5 +37,10 @@ export class OperationsService {
   //   5. call the `updateSales()` method
 
   // TODO: create an `updateSales() method that does this:
-  //   1.
+  //   1. subscribe to `products$` to fetch `products`
+  //   2. use `updateSoldProperty()` to update data
+  //      parameters? (products, [...this.ordersMap.values()])
+  //   3. we're done with `orderMap`, clear it
+  //   4. update `productsUpdate` method update the state of `products`
+  //   5. inform subscribers of `emitPaymentProcessed` that we're done
 }
