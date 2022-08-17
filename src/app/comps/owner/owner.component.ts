@@ -3,6 +3,8 @@ import { OperationsService } from "../operations.service";
 import { Order } from "../order.model";
 import { Product } from "../product.model";
 
+// TODO-7:
+//   1. providers...
 @Component({
   selector: 'app-owner',
   templateUrl: './owner.component.html',

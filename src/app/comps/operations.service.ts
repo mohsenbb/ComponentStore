@@ -93,4 +93,5 @@ export class OperationsService {
 //       }));
 
 // 6.1   readonly products$ = this.select(({products}) => products);    or equally:
+//       readonly products$ = this.select(state => state.products);
 
