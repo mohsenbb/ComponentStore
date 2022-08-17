@@ -9,7 +9,7 @@ import { MatInputModule } from "@angular/material/input";
 import { ReactiveFormsModule } from "@angular/forms";
 import { BoutiqueComponent } from './comps/boutique/boutique.component';
 import { BuyerComponent } from './comps/buyer/buyer.component';
-import { FounderComponent } from './comps/founder/founder.component';
+import { OwnerComponent } from './comps/owner/owner.component';
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 
@@ -18,7 +18,7 @@ import { MatButtonModule } from "@angular/material/button";
     AppComponent,
     BoutiqueComponent,
     BuyerComponent,
-    FounderComponent
+    OwnerComponent
   ],
   imports: [
     BrowserModule,

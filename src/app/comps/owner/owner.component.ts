@@ -4,15 +4,15 @@ import { Order } from "../order.model";
 import { Product } from "../product.model";
 
 @Component({
-  selector: 'app-founder',
-  templateUrl: './founder.component.html',
-  styleUrls: ['./founder.component.scss']
+  selector: 'app-owner',
+  templateUrl: './owner.component.html',
+  styleUrls: ['./owner.component.scss']
 })
-export class FounderComponent implements OnInit {
-  // TODO: make founder happy! he's only concerned with "earnings", then
+export class OwnerComponent implements OnInit {
+  // TODO: make owner happy! he's only concerned with "earnings", then
   //   1. ditch `products`; boutique component can get it's products from store
   //   2. ditch `orders`; buyer component knows best how to get its data
-  //   3. yep, all founder needs to be concerned with is `earnings$` for growth n'all;
+  //   3. yep, all owner needs to be concerned with is `earnings$` for growth n'all;
   //      what's needed is a selector that "binds" store's `earnings$` to the one here
   //      - NOTE: better to make `earnings` below become `earnings$`
 
