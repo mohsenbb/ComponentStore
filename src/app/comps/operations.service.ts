@@ -2,26 +2,25 @@ import { Injectable } from '@angular/core';
 import { Product, updateSoldProperty } from './product.model';
 import { Order } from "./order.model";
 
-// TODO:
-//   1. think: the state of what properties do we need to maintain?
-//      then, create an interface `OperationsState` that houses them
-//      (don't do this now: after you have created the interface,
-//       see comment-1 below for alignment)
-//   2. what would the default (initial) value should be for each object?
-//      then, create an object `defaultState` of type `OperationsState`
+// TODO-1:
+//   1. [done] `npm i @ngrx/component-store`
+//   2. * Think: the state of what properties do we need to maintain?
+//      Then, create an interface `OperationsState` that houses them
+//      When done, cross-check with Accelerator#1.2 below
+//   3. * What would the default (initial) value be for each object?
+//      Then, create an object `defaultState` of type `OperationsState`
 //      that sets them
-
-// TODO:
-//   1. although an Injectable, we don't need the store at the `root`
+//   4. Although an Injectable, we don't need the store at the `root`
 //      level; its' needed only in the `providers` list at the component
-//      that needs it; it's children will have access to it naturally then
+//      that needs it; it's children will have access to it naturally;
+//      make it @Injectable()
 @Injectable({
   providedIn: 'root'
 })
-// TODO:
-//   1. to convert this service into a store, it has to "extend"
-//      `ComponentStore` with the generic type you create above;
-//       that's how the store becomes aware and manages properties' state
+// TODO-2:
+//   1. * To convert this service into a component-store, it has to "extend"
+//      `ComponentStore` with the generic type you created above;
+//       that's how the store becomes aware-of and manages it's properties state
 export class OperationsService {
 
   products: Product[] = [
@@ -33,11 +32,27 @@ export class OperationsService {
     {id: 60, sold: 0, name: 'Swim suit', cost: 15}
   ];
 
-  // TODO:
-  //   1. extending a parent? then `super(...)` initialize it
+  // TODO-3:
+  //   1. Extending a parent? then `super(...)` initialize it
   //      with your default object
+
+  // TODO-5:
+  //   1. Let's `loadProducts()` in the constructor so that `products` is
+  //      loaded and ready in the components that need it
   constructor() {
   }
+
+  // TODO-4:
+  //   1. * Our most important property is `products`. Only after its set
+  //      can we view the Boutique and make `orders`, calculate `paymentDue`
+  //      and keep our total `earnings` in check after every payment.
+  //      So, let's create a `setState` method that immutably returns the state,
+  //      but overrides the default setting with our list of fresh `products`
+
+  // TODO-6:
+  //   1. * `products` is state-managed, so if we create a selector for it,
+  //      it's instantly available for any subscriber (here or in components).
+  //      Create the selector for it. Should be the same name + $.
 
   updateSales(orders: Order[]) {
     updateSoldProperty(this.products, orders);
@@ -61,7 +76,21 @@ export class OperationsService {
 }
 
 
-// =========================================================
+// ====================== Accelerators ===================================
 
-// 1. `OperationsState` should manage
-//    `products`, `orders`, `earnings` and `paymentDue`
+// 1.2 `OperationsState` should manage
+//     `products: Product[]`, `orders: Order[]`,
+//     `earnings: number` and `paymentDue:number`
+
+// 1.3 const defaultState: OperationsState = { products: [], orders: [],
+//     earnings: 0, paymentDue: 0}
+
+// 2.1 export class OperationsService extends ComponentStore<OperationsState> {
+
+// 4.1   readonly loadProducts = () => this.setState((state) => ({
+//         ...state,
+//         products: this.products
+//       }));
+
+// 6.1   readonly products$ = this.select(({products}) => products);    or equally:
+
